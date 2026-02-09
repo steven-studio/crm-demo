@@ -20,23 +20,25 @@ const UsersManagement = () => {
 
   // Updated table headers for API data structure
   const tableHeaders = [
-    { id: "id", title: "編號", align: "center" },
-    { id: "userInfo", title: "使用者資訊", align: "left" },
+    { id: "id", title: "客戶編號", align: "center" },
+    { id: "customerInfo", title: "客戶資訊", align: "left" },
     { id: "phone", title: "電話", align: "center" },
-    { id: "completeAddress", title: "完整地址", align: "left" },
-    { id: "interestRate", title: "利率", align: "center" },
+    { id: "address", title: "地址", align: "left" },
+    { id: "source", title: "來源", align: "center" },           // 新欄位：先佔位
+    { id: "lastInteraction", title: "最後互動", align: "center" }, // 新欄位：先佔位
     { id: "status", title: "狀態", align: "center" },
-    { id: "createdAt", title: "加入日期", align: "center" },
+    { id: "createdAt", title: "建立日期", align: "center" },    // 原加入日期更通用
     { id: "actions", title: "操作", align: "center" },
   ];
 
   // Updated columns to display
   const displayRows = [
     "id",
-    "userInfo",
+    "customerInfo",
     "phone",
-    "completeAddress",
-    "interest",
+    "address",
+    "source",
+    "lastInteraction",
     "status",
     "createdAt",
     "actions",
@@ -51,23 +53,20 @@ const UsersManagement = () => {
         console.log("response.data.data", response.data.data);
         // Transform API data to match table structure
         const transformedData = response.data.data.map((user, index) => ({
-          id: index + 1, // Use index as display ID
-          _id: user._id, // Keep original ID for operations
-          name: user.fullName || user.name || "無資料",
-          email: user.email,
+          ...user,
+
+          id: index + 1,
+          _id: user._id,
+
+          customerInfo: user.fullName || user.name || "無資料",   // ✅ 對齊 table
           phone: user.phoneNumber || user.contactNumber || "無資料",
           address: user.address || "無資料",
-          city: user.city || "",
-          state: user.state || "",
-          country: user.country || "",
-          postalCode: user.postalCode || "",
-          interest: `${user.interest}%`,
-          loanLimit: `${user.loanLimit}`,
-          emailVerified: user.emailVerified,
+
+          source: user.source || "-",                             // ✅ 先佔位
+          lastInteraction: user.lastInteraction || user.updatedAt || "-", // ✅ 沒有就用 updatedAt
+
           status: user.status ? "Active" : "Inactive",
-          createdAt: user.createdAt,
-          // Include all original data for edit functionality
-          ...user,
+          createdAt: user.createdAt || "-",
         }));
         setUsersData(transformedData);
         console.log("Users fetched successfully:", transformedData);
@@ -137,7 +136,6 @@ const UsersManagement = () => {
           isLoading={loading}
           onEdit={handleEdit}
           onDelete={handleDelete}
-          onViewClick={handleView}
           showDelete={true}
           onStatusChange={handleStatusChange}
           onView={handleView}
