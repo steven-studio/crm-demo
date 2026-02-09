@@ -9,30 +9,40 @@ import { useSnackbar } from "notistack";
 
 // Table headers for loan management
 const tableHeaders = [
-  { id: "createdAt", title: "申請日期", align: "left" },
-  { id: "userInfo", title: "使用者", align: "left" },
-  { id: "loanAmount", title: "貸款金額", align: "left" },
+  { id: "createdAt", title: "建立日期", align: "left" },
+  { id: "userInfo", title: "客戶", align: "left" },
+  { id: "loanAmount", title: "案件金額", align: "left" },
+
+  // 新的 CRM 欄位（先佔位）
+  { id: "productInfo", title: "方案/產品", align: "left" },
+  { id: "lastUpdated", title: "最後更新", align: "left" },
+
+  { id: "status", title: "狀態", align: "left" },
+  { id: "actions", title: "操作", align: "left" },
+
   { id: "interestRate", title: "利率", align: "left" },
   { id: "totalPayableAmount", title: "應付總額", align: "left" },
   { id: "totalMonths", title: "期數", align: "left" },
   { id: "paidAmount", title: "已繳金額", align: "left" },
   { id: "remainingBalance", title: "剩餘金額", align: "left" },
-  { id: "status", title: "狀態", align: "left" },
-  { id: "actions", title: "操作", align: "left" },
 ];
 
 // Display rows configuration
 const displayRows = [
   "createdAt",
   "userInfo",
-  "requestedAmount",
+  "loanAmount",     // 你 header 用 loanAmount
+  "productInfo",
+  "lastUpdated",
+  "status",
+  "actions",
+
+  // 舊金融欄位先保留時才放後面
   "interestRate",
   "totalPayableAmount",
-  "loan_tenure",
-  "totalPaidAmount",
+  "totalMonths",
+  "paidAmount",
   "remainingBalance",
-  "loan_status",
-  "actions",
 ];
 
 const LoanManagement = () => {
@@ -49,9 +59,14 @@ const LoanManagement = () => {
       setIsLoading(true);
       const response = await getAllLoanRequests({});
       if ([200, 201].includes(response?.status)) {
-        setLoanData(response.data.data.loanRequests);
+        const rows = (response.data.data.loanRequests || []).map((r) => ({
+          ...r,
+          productInfo: `${r.interestRate ?? "-"}% / ${r.totalMonths ?? "-"}期`,
+          lastUpdated: r.updatedAt || r.createdAt || "-",
+        }));
+        setLoanData(rows);
       } else {
-        enqueueSnackbar(response?.data?.message || "貸款資料取得失敗", {
+        enqueueSnackbar(response?.data?.message || "案件資料取得失敗", {
           variant: "error",
         });
       }
