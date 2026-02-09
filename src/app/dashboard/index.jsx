@@ -30,7 +30,7 @@ const Dashboard = () => {
         setDashboardData(response.data.data);
       } else {
         enqueueSnackbar(
-          response?.data?.message || "儀表板資料取得失敗",
+          response?.data?.message || "總覽資料取得失敗",
           {
             variant: "error",
           }
@@ -38,7 +38,7 @@ const Dashboard = () => {
       }
     } catch (error) {
       enqueueSnackbar(
-        error?.response?.data?.message || "儀表板資料取得失敗",
+        error?.response?.data?.message || "總覽資料取得失敗",
         {
           variant: "error",
         }
@@ -54,51 +54,51 @@ const Dashboard = () => {
 
   const dashboardStats = [
     {
-      title: "貸款總額",
+      title: "成交金額",
       value: dashboardData?.totalLoansAmount || 0,
-      subtitle: "已核發的貸款總額",
+      subtitle: "已成交案件的總金額",
       icon: <Banknote />,
     },
     {
-      title: "已撥款貸款",
+      title: "進行中案件",
       value: dashboardData?.totalBursedAmount || 0,
-      subtitle: "已撥款但待結案的貸款數",
+      subtitle: "已成立但尚未結案的案件",
       icon: <BanknoteArrowUp />,
     },
     {
-      title: "本月回收金額",
+      title: "本月回款",
       value: dashboardData?.currentMonthRepayments || 0,
-      subtitle: "本月應收回款金額",
+      subtitle: "本月回款金額",
       icon: <BanknoteArrowUp />,
     },
     {
-      title: "待處理貸款",
+      title: "待處理案件",
       value: dashboardData?.pendingLoans || 0,
-      subtitle: "待審核貸款筆數",
+      subtitle: "待審核／待跟進的案件數",
       icon: <BanknoteArrowDown />,
     },
     {
-      title: "已拒絕貸款",
+      title: "拒絕案件",
       value: dashboardData?.rejectedLoans || 0,
-      subtitle: "已拒件的貸款筆數",
+      subtitle: "已拒絕的案件數",
       icon: <BanknoteX />,
     },
     {
-      title: "使用者數",
+      title: "客戶總數",
       value: dashboardData?.totalUsers || 0,
-      subtitle: "系統使用者總數",
+      subtitle: "客戶總數",
       icon: <Users />,
     },
     {
-      title: "活躍使用者",
+      title: "活躍客戶",
       value: dashboardData?.activeUsers || 0,
-      subtitle: "活躍使用者數量",
+      subtitle: "近 N 日有互動的客戶數",
       icon: <UserCheck />,
     },
     {
-      title: "非活躍使用者",
+      title: "非活躍客戶",
       value: dashboardData?.inactiveUsers || 0,
-      subtitle: "未活躍使用者數量",
+      subtitle: "近 N 日無互動的客戶數",
       icon: <UserX />,
     },
   ];
@@ -109,7 +109,7 @@ const Dashboard = () => {
         variant="h3"
         sx={{ mb: 4, fontWeight: "bold", color: "text.primary" }}
       >
-        儀表板
+        總覽
       </Typography>
 
       <Grid container spacing={1}>

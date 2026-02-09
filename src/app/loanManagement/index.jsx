@@ -104,10 +104,10 @@ const LoanManagement = () => {
       {/* Header */}
       <Box sx={{ mb: 3 }}>
         <Typography variant="h4" sx={{ fontWeight: "600" }}>
-          貸款管理
+          案件管理
         </Typography>
         <Typography variant="body1" sx={{ color: "#666" }}>
-          管理貸款申請並追蹤還款進度
+          管理案件申請並追蹤進度
         </Typography>
       </Box>
 

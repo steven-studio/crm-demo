@@ -76,7 +76,7 @@ const UsersManagement = () => {
       }
     } catch (error) {
       console.error("Error fetching users:", error);
-      enqueueSnackbar("取得使用者資料失敗，請稍後再試。", {
+      enqueueSnackbar("取得客戶資料失敗，請稍後再試。", {
         variant: "error",
       });
     } finally {
@@ -119,10 +119,10 @@ const UsersManagement = () => {
       {/* Simple Header */}
       <Box sx={{ mb: 3 }}>
         <Typography variant="h4" sx={{ fontWeight: "600" }}>
-          使用者管理
+          客戶管理
         </Typography>
         <Typography variant="body1" sx={{ color: "#666" }}>
-          在這裡管理所有使用者
+          在這裡管理所有客戶
         </Typography>
       </Box>
 

@@ -206,7 +206,7 @@ export default function MainLayout({ children }) {
                   color: "primary.main",
                 }}
               >
-                貸款管理儀表板
+                案件管理儀表板
               </Typography>
             </Box>
           </Box>
