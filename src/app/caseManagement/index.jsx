@@ -2,16 +2,16 @@ import { Box, Typography, Paper } from "@mui/material";
 import DynamicTable from "../../components/dynamicTable";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllLoanRequests, updateLoanStatus } from "../../api/Modules/user";
+import { getAllCaseRequests, updateCaseStatus } from "../../api/Modules/user";
 import { useSnackbar } from "notistack";
 
 
 
-// Table headers for loan management
+// Table headers for case management
 const tableHeaders = [
   { id: "createdAt", title: "建立日期", align: "left" },
   { id: "userInfo", title: "客戶", align: "left" },
-  { id: "loanAmount", title: "案件金額", align: "left" },
+  { id: "caseAmount", title: "案件金額", align: "left" },
 
   // 新的 CRM 欄位（先佔位）
   { id: "productInfo", title: "方案/產品", align: "left" },
@@ -31,7 +31,7 @@ const tableHeaders = [
 const displayRows = [
   "createdAt",
   "userInfo",
-  "loanAmount",     // 你 header 用 loanAmount
+  "caseAmount",     // 你 header 用 caseAmount
   "productInfo",
   "lastUpdated",
   "status",
@@ -45,26 +45,26 @@ const displayRows = [
   "remainingBalance",
 ];
 
-const LoanManagement = () => {
+const CaseManagement = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
-  const [loanData, setLoanData] = useState([]);
+  const [caseData, setCaseData] = useState([]);
   const [statusLoading, setStatusLoading] = useState(false);
 
-  console.log("loanData", loanData);
+  console.log("caseData", caseData);
 
-  const fetchAllLoanRequest = async () => {
+  const fetchAllCaseRequest = async () => {
     try {
       setIsLoading(true);
-      const response = await getAllLoanRequests({});
+      const response = await getAllCaseRequests({});
       if ([200, 201].includes(response?.status)) {
-        const rows = (response.data.data.loanRequests || []).map((r) => ({
+        const rows = (response.data.data.caseRequests || []).map((r) => ({
           ...r,
           productInfo: `${r.interestRate ?? "-"}% / ${r.totalMonths ?? "-"}期`,
           lastUpdated: r.updatedAt || r.createdAt || "-",
         }));
-        setLoanData(rows);
+        setCaseData(rows);
       } else {
         enqueueSnackbar(response?.data?.message || "案件資料取得失敗", {
           variant: "error",
@@ -80,15 +80,15 @@ const LoanManagement = () => {
   };
 
   useEffect(() => {
-    fetchAllLoanRequest();
+    fetchAllCaseRequest();
   }, []);
 
-  const handleLoanStatusChange = async (row, status, index) => {
+  const handleCaseStatusChange = async (row, status, index) => {
     try {
       setStatusLoading(true);
-      const response = await updateLoanStatus(row._id, { status });
+      const response = await updateCaseStatus(row._id, { status });
       if ([200, 201].includes(response?.status)) {
-        fetchAllLoanRequest();
+        fetchAllCaseRequest();
         enqueueSnackbar(response?.data?.message || "更新成功", {
           variant: "success",
         });
@@ -111,7 +111,7 @@ const LoanManagement = () => {
 
   const handleView = (row) => {
     console.log("row", row);
-    navigate(`/loan-detail/${row._id}/user/${row.userId}`);
+    navigate(`/case-detail/${row._id}/user/${row.userId}`);
   };
 
   return (
@@ -126,16 +126,16 @@ const LoanManagement = () => {
         </Typography>
       </Box>
 
-      {/* Loan Table */}
+      {/* Case Table */}
       <Paper elevation={1} sx={{ borderRadius: "8px" }}>
         <DynamicTable
           tableWidth={1600}
           tableHeader={tableHeaders}
-          tableData={loanData}
+          tableData={caseData}
           displayRows={displayRows}
           isLoading={isLoading}
           showPagination={true}
-          handleLoanStatusChange={handleLoanStatusChange}
+          handleCaseStatusChange={handleCaseStatusChange}
           statusLoading={statusLoading}
           onView={handleView}
 
@@ -150,4 +150,4 @@ const LoanManagement = () => {
   );
 };
 
-export default LoanManagement;
+export default CaseManagement;

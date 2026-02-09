@@ -3,10 +3,10 @@ import { ArrowLeft } from "lucide-react";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getLoanInstallment } from "../../api/Modules/user";
+import { getCaseInstallment } from "../../api/Modules/user";
 import DynamicTable from "../../components/dynamicTable";
 
-// Table headers for loan details
+// Table headers for case details
 const tableHeaders = [
   { id: "dueDate", title: "Due Date", align: "left" },
   {
@@ -40,17 +40,17 @@ const displayRows = [
   "installment_slip",
 ];
 
-const LoanDetail = () => {
+const CaseDetail = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const { id, userId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [installmentData, setInstallmentData] = useState([]);
 
-  const fetchAllLoanRequest = async () => {
+  const fetchAllCaseRequest = async () => {
     try {
       setIsLoading(true);
-      const response = await getLoanInstallment(id, userId);
+      const response = await getCaseInstallment(id, userId);
       if ([200, 201].includes(response?.status)) {
         setInstallmentData(response.data.data);
       } else {
@@ -72,7 +72,7 @@ const LoanDetail = () => {
   };
 
   useEffect(() => {
-    fetchAllLoanRequest();
+    fetchAllCaseRequest();
   }, []);
 
   return (
@@ -85,7 +85,7 @@ const LoanDetail = () => {
           <ArrowLeft size={20} />
         </IconButton>
         <Typography variant="h4" sx={{ fontWeight: "600" }}>
-          Loan Installments
+          Case Installments
         </Typography>
       </Box>
 
@@ -101,4 +101,4 @@ const LoanDetail = () => {
   );
 };
 
-export default LoanDetail;
+export default CaseDetail;

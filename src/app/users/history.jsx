@@ -4,9 +4,9 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  getAllLoanRequests,
+  getAllCaseRequests,
   getUsersByUserId,
-  updateLoanStatus,
+  updateCaseStatus,
 } from "../../api/Modules/user";
 import DynamicTable from "../../components/dynamicTable";
 
@@ -19,15 +19,15 @@ const tableHeaders1 = [
 // Updated columns to display
 const displayRows1 = ["createdAt", "message"];
 
-// Table headers for loan management
+// Table headers for case management
 const tableHeaders2 = [
   { id: "createdAt", title: "申請日期", align: "left" },
   { id: "userInfo", title: "使用者", align: "left" },
-  { id: "loanAmount", title: "貸款金額", align: "left" },
+  { id: "requestedAmount", title: "申請金額", align: "left" },
   { id: "interestRate", title: "利率", align: "left" },
   { id: "totalPayableAmount", title: "應付總額", align: "left" },
-  { id: "totalMonths", title: "期數", align: "left" },
-  { id: "paidAmount", title: "已繳金額", align: "left" },
+  { id: "loan_tenure", title: "期數", align: "left" },
+  { id: "totalPaidAmount", title: "已繳金額", align: "left" },
   { id: "remainingBalance", title: "剩餘金額", align: "left" },
   { id: "status", title: "狀態", align: "left" },
   { id: "actions", title: "操作", align: "left" },

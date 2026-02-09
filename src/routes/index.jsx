@@ -17,9 +17,9 @@ import OTPVerification from "../app/auth/otpVerification";
 import SetNewPassword from "../app/auth/setNewPassword";
 import Dashboard from "../app/dashboard";
 import UsersManagement from "../app/users";
-import LoanManagement from "../app/loanManagement";
+import CaseManagement from "../app/caseManagement";
 import SettingsManagement from "../app/settings";
-import LoanDetails from "../app/loanManagement/loanDetail";
+import CaseDetails from "../app/caseManagement/caseDetail";
 import Userhistory from "../app/users/history";
 import FaqPage from "../app/faq";
 import TermsPage from "../app/terms";
@@ -79,9 +79,9 @@ const ADMIN_ROUTES = [
   {
     id: 3,
     name: "案件管理",
-    component: <LoanManagement />,
+    component: <CaseManagement />,
     exact: "exact",
-    path: "/loan-management",
+    path: "/case-management",
     activeIcon: <HandCoins size={20} color="#ffffff" />,
     inActiveIcon: <HandCoins size={20} color="#64748b" />,
   },
@@ -133,9 +133,9 @@ const ADMIN_ROUTES = [
   {
     id: 9,
     name: "案件詳情",
-    component: <LoanDetails />,
+    component: <CaseDetails />,
     exact: "exact",
-    path: "/loan-detail/:id/user/:userId",
+    path: "/case-detail/:id/user/:userId",
     activeIcon: <HandCoins size={20} color="#ffffff" />,
     inActiveIcon: <HandCoins size={20} color="#64748b" />,
     isHideMenu: true,

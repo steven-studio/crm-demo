@@ -15,8 +15,8 @@ export const adminChangeUserPassword = (id, payload) =>
 export const adminResetUserPassword = (id, payload) =>
   api(`${ENDPOINTS.adminResetUserPassword}/${id}`, payload, "put");
 
-export const getAllLoanRequests = (params) => {
-  const url = ENDPOINTS.requestLoan;
+export const getAllCaseRequests = (params) => {
+  const url = ENDPOINTS.requestCase;
 
   const queryParams = new URLSearchParams();
 
@@ -37,8 +37,8 @@ export const getAllLoanRequests = (params) => {
   return api(finalUrl, null, "get");
 };
 
-export const updateLoanStatus = (id, payload) =>
-  api(`${ENDPOINTS.updateLoanStatus}/${id}`, payload, "put");
+export const updateCaseStatus = (id, payload) =>
+  api(`${ENDPOINTS.updateCaseStatus}/${id}`, payload, "put");
 
-export const getLoanInstallment = (id, userId) =>
-  api(`${ENDPOINTS.requestLoanInstallment}/${id}/${userId}`, null, "get");
+export const getCaseInstallment = (id, userId) =>
+  api(`${ENDPOINTS.requestCaseInstallment}/${id}/${userId}`, null, "get");
