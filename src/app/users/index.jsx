@@ -124,7 +124,7 @@ const UsersManagement = () => {
       {/* Simple Table */}
       <Paper elevation={1} sx={{ borderRadius: "8px" }}>
         <DynamicTable
-          tableWidth={1200}
+          tableWidth={"100%"}
           tableHeader={tableHeaders}
           tableData={usersData}
           displayRows={displayRows}
