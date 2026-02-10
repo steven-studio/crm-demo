@@ -20,28 +20,24 @@ const UsersManagement = () => {
 
   // Updated table headers for API data structure
   const tableHeaders = [
-    { id: "id", title: "客戶編號", align: "center" },
-    { id: "customerInfo", title: "客戶資訊", align: "left" },
-    { id: "phone", title: "電話", align: "center" },
+    { id: "id", title: "客戶編號", align: "left" },
+    { id: "name", title: "客戶名稱", align: "left" },
+    { id: "taxId", title: "客戶統編", align: "left" },
+    { id: "owner", title: "業務窗口", align: "left" },
+    { id: "phone", title: "客戶電話", align: "left" },
+    { id: "contactPerson", title: "聯絡人", align: "left" },
     { id: "address", title: "地址", align: "left" },
-    { id: "source", title: "來源", align: "center" },           // 新欄位：先佔位
-    { id: "lastInteraction", title: "最後互動", align: "center" }, // 新欄位：先佔位
-    { id: "status", title: "狀態", align: "center" },
-    { id: "createdAt", title: "建立日期", align: "center" },    // 原加入日期更通用
-    { id: "actions", title: "操作", align: "center" },
   ];
 
   // Updated columns to display
   const displayRows = [
     "id",
-    "customerInfo",
+    "name",
+    "taxId",
+    "owner",
     "phone",
+    "contactPerson",
     "address",
-    "source",
-    "lastInteraction",
-    "status",
-    "createdAt",
-    "actions",
   ];
 
   const fetchAllUsers = async () => {
