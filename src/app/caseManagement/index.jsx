@@ -19,12 +19,6 @@ const tableHeaders = [
 
   { id: "status", title: "狀態", align: "left" },
   { id: "actions", title: "操作", align: "left" },
-
-  { id: "interestRate", title: "利率", align: "left" },
-  { id: "totalPayableAmount", title: "應付總額", align: "left" },
-  { id: "totalMonths", title: "期數", align: "left" },
-  { id: "paidAmount", title: "已繳金額", align: "left" },
-  { id: "remainingBalance", title: "剩餘金額", align: "left" },
 ];
 
 // Display rows configuration
@@ -36,13 +30,6 @@ const displayRows = [
   "lastUpdated",
   "status",
   "actions",
-
-  // 舊金融欄位先保留時才放後面
-  "interestRate",
-  "totalPayableAmount",
-  "totalMonths",
-  "paidAmount",
-  "remainingBalance",
 ];
 
 const CaseManagement = () => {
@@ -129,7 +116,7 @@ const CaseManagement = () => {
       {/* Case Table */}
       <Paper elevation={1} sx={{ borderRadius: "8px" }}>
         <DynamicTable
-          tableWidth={1600}
+          tableWidth={1200}
           tableHeader={tableHeaders}
           tableData={caseData}
           displayRows={displayRows}
